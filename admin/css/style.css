@@ -1,0 +1,107 @@
+/* 
+define the site wide CSS
+font family to Comic Sans; 
+	requires following in head tag
+	<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
+and background color to Greek blue (2440F2)
+*/
+body	{
+	background-color: 2440F2;
+	font-family: "Open Sans";
+}
+
+/* 
+for first table that encapsultes all UI. 
+Defines background color to Greek blue (2440F2)
+*/
+table.style1 {
+	background-color: 2440F2;
+	width: 1000px;
+	border-style: solid;
+}
+
+/*
+Defines the content table. 
+Sets background color to white for reading text clearlys
+*/
+table.style2 {
+	background-color: FFFFFF;
+	width: 100%;
+	border-style: solid;
+}
+
+/*
+CSS for searchbar 
+*/
+table.searchbar{
+	width: 75%;
+	border: 1px solid gray;
+    border-radius: 5px;
+}
+
+/*
+CSS search bar.
+Defines input box CSS
+*/
+input[type=text], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+/*
+CSS for search bar continued.
+Defines css for submit button image
+*/
+input.icon {
+	height: 24px;
+    width: 24px;
+}
+
+/*
+main content of the page.
+*/
+td.contentDiv {
+	border-style: outset none none none;
+	border-color: D3D3D3;
+	/*height: 800px;*/
+}
+
+td.h3 {
+	font-size: 24px;
+	font-weight: bold;
+}
+hr.style {
+	height: 10px;
+	border: 0;
+	box-shadow: 0 10px 10px -10px #8c8b8b inset;
+}
+/*
+CSS for disclaimer at botom of page
+*/
+td.disclaimer {
+	border-style: outset none none none;
+	border-color: D3D3D3;
+	background-color: FFFFFF;
+	font-size: 10px;
+	color: gray;
+	text-align: center;
+}
+
+/*
+CSS declaration for all icons
+*/
+img.icon {
+	height: 24px;
+    width: 24px;
+}
+
+/*
+defines a simple tab for html
+*/
+tab { 
+padding-left: 8em; 
+}
