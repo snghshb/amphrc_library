@@ -29,7 +29,7 @@ else {
     </script>
 	<script> 
     $(function(){
-      $("#includeFooter").load("footer2.html"); 
+      $("#includeFooter").load("footer.html"); 
     });
     </script>
 </head>
@@ -38,27 +38,30 @@ else {
 <div id="includeHeader"></div>
 <div id="includeNavbar"></div>
 <div class="content" align="center">
-	<table border="0px" width="80%" height="400px" class="marginTable">
+	<table border="0px" width="80%" class="marginTable" valign="top">
+	<tr>
+	<td><h3>Add a New Author</h3><hr /></td>
+	</tr>
 	<tr>
 	<td valign="top">
-	
-		<h3>Hello, <?php echo $login_session;?>!</h3>
-		<hr />
-		<p>Welcome to the administrator's landing page.<br />	Start by clicking on one of the tasks in the top menu.</p>
-	
+	<form action="insertAuthor.php" method="post" enctype="multipart/form-data">
+		<div class="form-group">
+			<label for="newAuthorFName">Enter Author First name</label>
+			<input type="newAuthorFName" class="form-control" name="newAuthorFName">
+		</div>
+		<div class="form-group">
+			<label for="newAuthorLName">Enter Author Last name</label>
+			<input type="newAuthorLName" class="form-control" name="newAuthorLName">
+		</div>
+		<button type="submit" class="btn btn-default">Submit</button>
+	</form>
 	</td>
-	</tr>
-	<tr>
-	<td><p>&nbsp;&nbsp;&nbsp;</p></td>
-	</tr>
-	<tr>
-	<td><div id="includeFooter"></div></td>
 	</tr>
 	</table>
 </div>
+<div id="includeFooter"></div>
 </div>
 </body>
-</html>
 </html>
 <?php
 $conn->close();

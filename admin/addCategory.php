@@ -29,7 +29,7 @@ else {
     </script>
 	<script> 
     $(function(){
-      $("#includeFooter").load("footer2.html"); 
+      $("#includeFooter").load("footer.html"); 
     });
     </script>
 </head>
@@ -41,24 +41,20 @@ else {
 	<table border="0px" width="80%" height="400px" class="marginTable">
 	<tr>
 	<td valign="top">
-	
-		<h3>Hello, <?php echo $login_session;?>!</h3>
-		<hr />
-		<p>Welcome to the administrator's landing page.<br />	Start by clicking on one of the tasks in the top menu.</p>
-	
+	<form action="insertCategory.php" method="post" enctype="multipart/form-data">
+		<div class="form-group">
+			<label for="newCategory">Add new category name</label>
+			<input type="newCategory" class="form-control" name="newCategory">
+		</div>
+		<button type="submit" class="btn btn-default">Submit</button>
+	</form>
 	</td>
-	</tr>
-	<tr>
-	<td><p>&nbsp;&nbsp;&nbsp;</p></td>
-	</tr>
-	<tr>
-	<td><div id="includeFooter"></div></td>
 	</tr>
 	</table>
 </div>
+<div id="includeFooter"></div>
 </div>
 </body>
-</html>
 </html>
 <?php
 $conn->close();

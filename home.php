@@ -4,12 +4,33 @@
 	<meta charset="utf-8">
 	<!--meta http-equiv="X-UA-Compatible" content="IE=edge"-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="css/bootstrap.css">
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans">
+	<!--link rel="stylesheet" href="../css/bootstrap.css"-->
 	<link rel="stylesheet" href="css/custom.css">
-	<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
-	<title>User - Help/Information</title>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
+	<title>Search Home</title>
+	<script>
+	function validateForm() {
+		var x = document.forms["searchForm"]["searchTerms"].value;
+		if (x == "") {
+			alert("Search query cannot be blank.");
+			return false;
+		}
+		var pattern = new RegExp(/[~`!#$%\^&*+=\-\[\]\\';,{}|\\":<>\?]/); //unacceptable chars
+		if (pattern.test(x)) {
+			alert("Please input only standard alphanumerical characters in search box");
+				return false;
+			}
+		}
+	</script>
+		<script> 
+    $(function(){
+      $("#includeFooter").load("footer2.html"); 
+    });
+    </script>
+
 </head>
 <body>
 <div class="wrapper">
@@ -39,49 +60,50 @@
 	<div class="content" align="center">
 		<table border="0px" width="80%" height="400px" class="marginTable">
 			<tr>
-			<td colspan="2">
-			<h3>Welcome to the AMPHRC Library</h3>
+			<td><h3>Welcome to the AMPHRC Library</h3>
 			<h4><small>Home to a selection of research materials hosted by the Asia Minor Pontos Hellenic Research Center</small></h4>
 			</td>
 			</tr>
 			<tr>
-			<td colspan="2">
-			<div class="well well-lg">
-			This is a simple, keyword based search for the library hosted by The Asia Minor Pontos Hellenic Research Center.
-			<br />Simply type in what you are searching for.
-			</div>
-			Find more about the AMPHRC <a href="http://hellenicresearchcenter.org/" target="_blank">here</a>
-			<br /><br />Click <a href="./home.php">here</a> to go back to your search page
+			<td width="80%">
+				<div class="content" align="center">
+				<form action="queryoutput.php" method="post" name ="searchForm" onsubmit="return validateForm()">
+					<table border="0px" width="100%">
+					<tr>
+						<td>
+						<div class="form-group">
+							<label for="searchTerms">What are you looking for?</label>
+							<input type = "text" class="form-control" name= "searchTerms" placeholder="Your search keywords..">
+						</div>
+						</td>
+					</tr>
+					<tr>
+						<td align="center">
+						<button type="submit" class="btn btn-default">
+						SEARCH <span class="glyphicon glyphicon-search"></span>
+						</button>
+						</td>
+					</tr>
+					</table>
+				</form>
+				</div>
 			</td>
 			</tr>
 			<tr>
-			<td class="style">
-			<br /><br /><b>CONTACT US</b>
-			<br />Telephone: +1 312-964-5120
-			<br /><br />
-			<a href="mailto:info@hellenicresearchcenter.org?Subject=Hello%20AMPHRC" class="btn btn-info btn-md">
-			<span class="glyphicon glyphicon-envelope"></span> E-mail 
-			</a> info@hellenicresearchcenter.org
-			<br /><br /><b>Address</b>
-			<br />AMPHRC
-			<br />801 West Adams Street
-			<br />Suite 230
-			<br />Chicago, IL 60607
-			</td>
-			<td width="50%" class="style">
+			<td>
 				<blockquote class="text-justify">
 				<p>The Asia Minor and Pontos Hellenic Research Center (AMPHRC) is a historical society and a 501 (c) (3) non-profit organization founded in January 2011. Our goal as a research center—unique in its kind—is to document and disseminate information about the Greek communities of the later Ottoman empire, and study the expulsion of expulsion of the Greeks from  their ancestral homelands in Asia Minor (or Anatolia), Eastern Thrace, and Pontos.</p>
 				<footer><a href="http://hellenicresearchcenter.org/about/" target="_blank">The Asia Minor and Pontos Hellenic Research Center</a></footer>
-				</blockquote>
-			</td>
+				</blockquote></td>
+			</tr>
+			<tr>
+			<td><p>&nbsp;</p> <p>&nbsp;</p> <p>&nbsp;</p></td>
+			</tr>
+			<tr>
+			<td><div id="includeFooter"></div></td>
 			</tr>
 		</table>
 	</div>
-	<footer class="footer">
-		<div class="disclaimer">
-			<small>Asia Minor and Pontos Hellenic Research Center Inc © 2017 All Rights Reserved.</small>
-		</div>
-    </footer>
 </div>
 </body>
 </html>

@@ -1,8 +1,12 @@
 <?php
-include('session.php'); 
+include('config.php');
+include ('session.php');
+	//function renderForm($publication_id, $publication_id, $title, $isbn, $publish_year, $start_year, $end_year, $volume, $description, $availability_id, $error){
+	include('session.php'); 
 if (ADMIN_ID === 0)
 	header('Location: ./home.php');
 else {
+	
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -29,7 +33,7 @@ else {
     </script>
 	<script> 
     $(function(){
-      $("#includeFooter").load("footer2.html"); 
+      $("#includeFooter").load("footer.html"); 
     });
     </script>
 </head>
@@ -41,24 +45,42 @@ else {
 	<table border="0px" width="80%" height="400px" class="marginTable">
 	<tr>
 	<td valign="top">
+	<?php
+ 
+// Check connection
+if($conn === false){
+    die("ERROR: Could not connect. " . mysqli_connect_error());
+}
+ 
+// Escape user inputs for security
+$newCategory = mysqli_real_escape_string($conn, $_REQUEST['newCategory']);
+ 
+// attempt insert query execution
+$sql = "INSERT INTO amphrc_library.category (category_name) VALUES ('$newCategory')";
+if(mysqli_query($conn, $sql)){
+    echo "Category: <h4>".$newCategory."</h4> added successfully.";
+	echo "<br />The page will redirect you shortly...";
 	
-		<h3>Hello, <?php echo $login_session;?>!</h3>
-		<hr />
-		<p>Welcome to the administrator's landing page.<br />	Start by clicking on one of the tasks in the top menu.</p>
+	$sql_log = "INSERT INTO amphrc_library.admin_log (admin_id, action) VALUES (".ADMIN_ID.", 'Created a new category $newCategory')";
 	
-	</td>
-	</tr>
-	<tr>
-	<td><p>&nbsp;&nbsp;&nbsp;</p></td>
-	</tr>
-	<tr>
-	<td><div id="includeFooter"></div></td>
+	if(mysqli_query($conn, $sql_log)){
+	
+		header('Location: ./categoryOption.php');
+	}
+} else{
+    echo "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
+}
+ 
+// close connection
+mysqli_close($conn);
+?>
+</td>
 	</tr>
 	</table>
 </div>
+<div id="includeFooter"></div>
 </div>
 </body>
-</html>
 </html>
 <?php
 $conn->close();

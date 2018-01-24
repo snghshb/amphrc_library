@@ -1,47 +1,45 @@
-<?php
-include('session.php'); 
-if (ADMIN_ID === 0)
-	header('Location: ./home.php');
-else {
-?>
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-	<meta charset="utf-8">
-	<!--meta http-equiv="X-UA-Compatible" content="IE=edge"-->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans">
-	<!--link rel="stylesheet" href="../css/bootstrap.css"-->
-	<link rel="stylesheet" href="../css/custom.css">
-	<title>Administrator - Landing Page</title>
-	<script> 
-    $(function(){
-      $("#includeHeader").load("header.html"); 
-    });
-    </script>
-	<script> 
-    $(function(){
-      $("#includeNavbar").load("navbar.html"); 
-    });
-    </script>
-	<script> 
-    $(function(){
-      $("#includeFooter").load("footer2.html"); 
-    });
-    </script>
+	<title>Administrator - View Existing Library</title>
+	<link rel="stylesheet" type="text/css" href="../css/style.css">
+	<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
+
 </head>
 <body>
-<div class="wrapper">
-<div id="includeHeader"></div>
-<div id="includeNavbar"></div>
-<div class="content" align="center">
-	<table border="0px" width="80%" height="400px" class="marginTable">
-	<tr>
-	<td valign="top">
-	<?php
+	<div align="center">
+		<table class="style1">
+			<tr>
+				<td><a href="./landingpage.php" target="_blank"><img src="../css/images/logo.png" alt="logo"  title="AMPHRC Library Administrator" /></a></td>
+			</tr>
+			<tr>
+			<td>
+				<table class="style2">
+					<tr>
+						<td align="left"><a href="./landingpage.php"><img src="../css/images/home.png" alt="home" class="icon" title="Library Admin Home" /></a></td>
+						<td align="right"><a href="./adminhelp.html" target="_blank"><img src="../css/images/info.png" alt="home" class="icon" title="Library Help" /></a>   <a href="./logout.php"><img src="../css/images/logout.png" alt="home" class="icon" title="Admin Logout" /></a></td>
+					</tr>
+					<tr>
+						<td class="contentDiv" width="25%" valign="top" align="center">
+							<table class="leftNavigationPane">
+								<tr>
+									<td><a href="./fileuploadform.php" class="button">Upload file</a></td>
+								</tr>
+								<tr>
+									<td><a href="./editExisting.php" class="button">Edit existing files</td>
+								</tr>
+								<tr>
+									<td><a href="./viewExisting.php" class="button">View existing library</a></td>
+								</tr>
+								<tr>
+									<td><a href="./viewStatistics.php" class="button">Statistics</a></td>
+								</tr>
+								<tr>
+									<td><a href="../home.php" target="_blank" class="button">View as user</a></td>
+								</tr>
+							</table>
+						</td>
+						<td class="contentDiv">
+<?php
 // connect to the database
 include('config.php');
 
@@ -92,26 +90,22 @@ while($row = mysqli_fetch_array($result)) {
 			echo $row1['category_name'];
 	echo '</td>';
 	
+	
 }
 
 // close table>
 echo "</table>";
 ?>
 <p><a href="fileuploadform.php">Add a new record</a></p>
-	</td>
-	</tr>
-	<tr>
-	<td><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p></td>
-	</tr>
-	<tr>
-	<td><div id="includeFooter"></div></td>
-	</tr>
-	</table>
-</div>
-</div>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2" class="disclaimer">Asia Minor and Pontos Hellenic Research Center Inc © 2017 All Rights Reserved.</td>
+					</tr>
+				</table>
+			</td>
+			</tr>
+		</table>
+	</div>
 </body>
 </html>
-<?php
-$conn->close();
-}
-?>

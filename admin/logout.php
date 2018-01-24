@@ -1,8 +1,13 @@
 <?php
-include('session.php'); 
-if (ADMIN_ID === 0)
-	header('Location: ./home.php');
-else {
+session_start();
+unset($_SESSION['login_user']);        
+unset($_SESSION["password"]);
+   
+session_destroy();
+
+//header("Location: ../admin/home.php");
+//exit;
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -29,38 +34,28 @@ else {
     </script>
 	<script> 
     $(function(){
-      $("#includeFooter").load("footer2.html"); 
+      $("#includeFooter").load("footer.html"); 
     });
     </script>
 </head>
 <body>
 <div class="wrapper">
 <div id="includeHeader"></div>
-<div id="includeNavbar"></div>
 <div class="content" align="center">
 	<table border="0px" width="80%" height="400px" class="marginTable">
 	<tr>
-	<td valign="top">
-	
-		<h3>Hello, <?php echo $login_session;?>!</h3>
-		<hr />
-		<p>Welcome to the administrator's landing page.<br />	Start by clicking on one of the tasks in the top menu.</p>
-	
+	<td valign="top" align="center">
+		<div class="alert alert-danger">
+			<strong>YOU HAVE BEEN SUCCESSFULLY LOGGED OUT</strong>
+		</div>
+		<div class="alert alert-info">
+			<a href="./home.php"><button  class="btn btn-info">LOGIN AGAIN</button></a>
+			<a href="../home.php"><button  class="btn btn-info">ACCESS USER HOME</button></a>
+		</div>
 	</td>
-	</tr>
-	<tr>
-	<td><p>&nbsp;&nbsp;&nbsp;</p></td>
-	</tr>
-	<tr>
-	<td><div id="includeFooter"></div></td>
 	</tr>
 	</table>
 </div>
-</div>
+<div id="includeFooter"></div>
 </body>
 </html>
-</html>
-<?php
-$conn->close();
-}
-?>

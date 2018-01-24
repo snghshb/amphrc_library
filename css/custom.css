@@ -6,21 +6,66 @@ font family to Comic Sans;
 and background color to Greek blue (2440F2)
 currently set to hellenicresearch.org website = 0A5794
 */
+.full-width-div {
+    width: 100%;
+    left: 0;
+}
+html {
+	height: 100%;
+}
 body	{
-	background-color: 0A5794;
+	/*background-color: #0A5794;*/
+	font-family: "Open Sans" !important;
+	height: 100%;
+}
+.page-header {
+	background-color: #0A5794;
+}
+div.navbar-header{
+	background-color: #0A5794;
 	font-family: "Open Sans";
 }
-
+.wrapper {
+    min-height: 100% !important;
+    height: 100% !important;
+    margin: 0 auto -33px;
+}
+.container{
+	background-color: #0A5794;
+}
+.navbar-brand {
+	background-color: #e7e7e7;
+}
+.navbar-header {
+	background-color: #e7e7e7;
+}
+.container-navbar{
+	/* background-color: #0A5794; */
+}
+.container-fluid{
+	background-color: #FFFFFF;
+}
+blockquote {
+	font-size: 12px;
+}
+.content {
+	background-color: #FFFFFF;
+}
+div.marginTable {
+	margin: 10px;
+}
+table.marginTable {
+	margin: 10px;
+}
 /* 
 for first table that encapsultes all UI. 
 Defines background color to Greek blue (2440F2)
 */
 table.style1 {
-	background-color: 0A5794;
+	background-color: #0A5794;
 	width: 1000px;
-		border-style: solid;
+	border-style: solid;
 }
-
 /*
 Defines the content table. 
 Sets background color to white for reading text clearlys
@@ -32,6 +77,24 @@ table.style2 {
 	
 }
 
+table.displayFileInfo {
+	border-radius: 25px;
+    border: 2px solid #0A5794;
+    padding: 20px;    
+}
+td.desc {
+	color: #000011;
+	font-weight: bold;
+	text-align: right;
+	padding-right: 10px;
+	padding-left: 10px;
+	vertical-align: top;
+}
+td.descValue {
+	padding-left: 10px;
+	padding-right: 10px;
+	vertical-align: top;
+}
 /*
 CSS for searchbar 
 */
@@ -133,7 +196,7 @@ td.h3 {
 	font-size: 24px;
 	font-weight: bold;
 }
-hr.style {
+.style {
 	height: 10px;
 	border: 0;
 	box-shadow: 0 10px 10px -10px #8c8b8b inset;
@@ -141,14 +204,37 @@ hr.style {
 /*
 CSS for disclaimer at botom of page
 */
-td.disclaimer {
+disclaimer {
 	border-style: outset none none none;
-	border-color: D3D3D3;
-	background-color: FFFFFF;
+	border-color: #D3D3D3;
+	background-color: #FFFFFF;
 	font-size: 10px;
 	color: gray;
 	text-align: center;
 }
+.navbar-brand:hover,
+.navbar-brand:focus {
+  background-color: #e7e7e7;
+}
+.footer {
+  /* position: absolute; */
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  background-color: #efefef;
+  text-align: center;
+}
+.footer2 {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  background-color: #efefef;
+  text-align: center;
+}
+
 p.footnote {
 	font-size: 10px;
 	color: gray;
@@ -157,9 +243,16 @@ table.loginForm {
 	border-style: none none none none;
 	border-color: D3D3D3;
 	background-color: FFFFFF;
-	border: 1px solid black;
+	border: 0px solid black;
 	border-radius: 25px;
 	padding: 50px 50px 50px 50px;
+}
+table.customForm {
+	width: 100%;
+	padding-top: 5px;
+    padding-right: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
 }
 /*
 CSS declaration for all icons
@@ -174,4 +267,14 @@ defines a simple tab for html
 */
 tab { 
 padding-left: 8em; 
+}
+.caret-right {
+    border-bottom: 4px solid transparent;
+    border-top: 4px solid transparent;
+    border-left: 4px solid;
+    display: inline-block;
+    height: 0;
+    opacity: 0.3;
+	width: 0;
+	vertical-align: middle !important;
 }

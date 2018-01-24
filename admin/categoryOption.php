@@ -16,7 +16,7 @@ else {
 	<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans">
 	<!--link rel="stylesheet" href="../css/bootstrap.css"-->
 	<link rel="stylesheet" href="../css/custom.css">
-	<title>Administrator - Landing Page</title>
+	<title>Administrator - Manage Categories</title>
 	<script> 
     $(function(){
       $("#includeHeader").load("header.html"); 
@@ -41,67 +41,90 @@ else {
 	<table border="0px" width="80%" height="400px" class="marginTable">
 	<tr>
 	<td valign="top">
-	<?php
-// connect to the database
-include('config.php');
+<?php
 
+/*
+
+VIEW.PHP
+
+Displays all data from 'players' table
+
+*/
+
+
+
+// connect to the database
+if (isset($_GET['message'])){
+
+			echo '<div style="padding:4px; border:1px solid red; color:red;">'."Cannot Delete Record: Category in use by publications".'</div>';
+
+}
+
+
+include('config.php');
+if (isset($_POST['submit'])){
+$category_name = strtoupper($_POST['category_name']);
+$result = mysqli_query($conn,"SELECT * FROM category where upper(category_name) = upper('$category_name')");
+if (mysqli_num_rows($result)==0){
+	mysqli_query($conn, "INSERT category SET category_name = '$category_name'");
+	header("Location: categoryOption.php");
+}else{
+	echo "This category already exists";
+
+}
+}
 // get results from database
-$result = mysqli_query($conn,"SELECT * FROM publications");
+
+$result = mysqli_query($conn,"SELECT c.category_id, c.category_name, (Select count(*) from publications p where p.category_id = c.category_id) as count_used FROM category c Order by Category_name asc");
+
+
 
 // display data in table
-echo "<p><b>View All</b> | <a href='view-paginated.php?page=1'>View Paginated</a></p>";
 
-echo "<table border='1px' width=\"100%\">";
+//echo "<p><b>View All</b> | <a href='view-paginated.php?page=1'>View Paginated</a></p>";
 
-echo '<tr>
-	<th>ID</th>
-	<th width="80%">File Information</th>
-	<th colspan="3">Actions</th>
-	</tr>';
+
+
+echo "<table class=\"table table-hover\" width=\"80%\">";
+
+echo "<thead><tr> <th>Category ID</th> <th>Count Used</th> <th>Category Name</th> <th colspan=\"2\">Actions</th></tr></thead>";
 
 // loop through results of database query, displaying them in the table
 
+echo "<tbody>";
+
 while($row = mysqli_fetch_array($result)) {
+
 // echo out the contents of each row into a table
-	echo '<tr>';
-	echo '<td rowspan="3">' . $row['publication_id'] . '</td>';
-	echo '<td width="300px">' . $row['title'] . '</td>';
-	echo '<td colspan="3">';
-	$availability_id = $row['availability_id'];
-	if ($availability_id == 0)
-		echo "Online";
-	else if ($availability_id == 1)
-		echo "On-premise";
-	else if ($availability_id == 2)
-		echo "Online/on-premise";
-	else echo "Partner";
-	echo '</td>';
-	echo '</tr><tr>';
-	echo '<td width="300px">' . $row['description'] . '</td>';
-	echo '<td rowspan="2"><a href="viewAllDetails.php?publication_id=' . $row['publication_id'] . '">
-	<img src="../css/images/view.png" alt="edit" class="icon" title="FileView" /></a></td>';
-	echo '<td rowspan="2"><a href="editExisting.php?publication_id=' . $row['publication_id'] . '">
-	<img src="../css/images/edit.png" alt="edit" class="icon" title="FileEdit" /></a></td>';
-	echo '<td rowspan="2"><a href="delete.php?publication_id=' . $row['publication_id'] . '">
-	<img src="../css/images/delete.png" alt="delete" class="icon" title="FileDelete" /></a></td>';
-	echo '</tr>';
-	echo '<td>';
-	$category_id = $row['category_id'];
-	$result1 = mysqli_query($conn,"SELECT * FROM category WHERE category_id=$category_id");
-	while ($row1 = mysqli_fetch_array($result1))
-			echo $row1['category_name'];
-	echo '</td>';
-	
+
+echo "<tr>";
+
+echo '<td>' . $row['category_id'] . '</td>';
+
+echo '<td>' . $row['count_used'] . '</td>';
+
+echo '<td>' . $row['category_name'] . '</td>';
+
+echo '<td><a href="categoryEdit.php?category_id=' . $row['category_id'] . '"><kbd>EDIT</kbd></a></td>';
+
+echo '<td><a href="categoryDelete.php?category_id=' . $row['category_id'] . '"><code>DELETE</code></a></td>';
+
+echo "</tr>";
+
 }
 
+
+
 // close table>
+echo "</tbody>";
 echo "</table>";
+
 ?>
-<p><a href="fileuploadform.php">Add a new record</a></p>
-	</td>
+
+</td>
 	</tr>
 	<tr>
-	<td><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p></td>
+	<td><p>&nbsp;&nbsp;&nbsp;</p></td>
 	</tr>
 	<tr>
 	<td><div id="includeFooter"></div></td>

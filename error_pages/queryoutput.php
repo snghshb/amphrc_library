@@ -11,21 +11,11 @@
 	<!--link rel="stylesheet" href="../css/bootstrap.css"-->
 	<link rel="stylesheet" href="css/custom.css">
 	<title><?php echo $_POST['searchTerms']." - AMPHRC results"; ?></title>
-	<script> 
+		<script> 
     $(function(){
       $("#includeFooter").load("footer2.html"); 
     });
     </script>
-	<script>
-	$(function(){
-		$("#includeDirections").load("directionAMPHRC.html"); 
-    });
-	</script>
-	<script>
-	$(function(){
-		$("#includeDirections2").load("directionAMPHRC2.html"); 
-    });
-	</script>
 </head>
 <body>
 <div class="wrapper">
@@ -116,113 +106,29 @@
 		while ($row = $result->fetch_assoc())	{
 			$id = $row["availability_id"];
 			echo "<tr><td>".$row["title"]."</td><td>";
-			if ($id == 3) {
-			?>
-			<button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal">ACCESS WITH PARTNER WEBSITE</button>
-			<div id="myModal" class="modal fade" role="dialog">
-			<div class="modal-dialog">
-			<!-- Modal content-->
-			<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title"><?php echo $row["title"]; ?>
-				<small><br />Additional information for this resource can be found at the following links</small>
-				</h4>
-			</div>
-			<div class="modal-body">
-<?php
-
-echo "<table boreder=\"0px\" class=\"table table-hover\">";
-echo "<thead><th>URL(s)</th></thead>";
-echo "<tbody>";
-	$result5 = mysqli_query($conn, "SELECT url_id, url FROM amphrc_library.url where publication_id='".$row["publication_id"]."'");
-	while($row5 = mysqli_fetch_array($result5)) {
-		echo "<tr>";
-		//echo "<td>".$row5['url_id']."</td>";
-		echo "<td><a href=\"".$row5['url']."\" target=\"_blank\">".$row5['url']."</a></td>";
-		echo "</tr>";
-	}
-echo "</tbody>";
-echo "</table>";
-echo "<hr />";
-?>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default " data-dismiss="modal">Close</button>
-			</div>
-			</div>
-			</div>
-			</div>
-			<?php
-			}
-			if ($id == 1) {
-				?>
-			<button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal1">DIRECTIONS TO LIBRARY</button>
-			<div id="myModal1" class="modal fade" role="dialog">
-			<div class="modal-dialog modal-lg">
-			<!-- Modal content-->
-			<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title"><?php echo $row["title"]; ?>
-				<small><br />This resource can be found at our on premise library</small>
-				</h4>
-			</div>
-			<div class="modal-body">
-				<div id="includeDirections"></div>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default " data-dismiss="modal">Close</button>
-			</div>
-			</div>
-			</div>
-			</div>
-				<?php
-			}
-				//echo "<button type=\"button\" class=\"btn btn-warning btn-xs\"><a href=\"./directionAMPHRC.html\" target=\"_blank\">DIRECTIONS</a></button>";
+			if ($id == 3)
+				echo "<a href=\"./partnerWebsite.php?publication_id=".$row["publication_id"]."\" target=\"_blank\">Access with partner website</a>";
+			if ($id == 1)
+				echo "<a href=\"./directionAMPHRC.html\" target=\"_blank\">Directions</a>";
 			if ($id == 0){
 				$sql1 = "SELECT file_location FROM amphrc_library.file_location where publication_id =".$row["publication_id"];
 				$result1 = $conn->query($sql1);
 				if ($result1->num_rows > 0) {
 					while($row1 = $result1->fetch_assoc()) {
-						echo "<button type=\"button\" class=\"btn btn-success btn-xs\"><a href=\"./admin".$row1["file_location"]."\" target=\"_blank\">DOWNLOAD FILE</a></button>";
+						echo "<a href=\"./admin".$row1["file_location"]."\" target=\"_blank\">Download File</a>";
 						#echo $row1["file_location"];
 					}
 				}
 			}
 			if ($id == 2){
-				?>
-				<button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal2">ACCESS FILE</button>
-				<div id="myModal2" class="modal fade" role="dialog">
-				<div class="modal-dialog modal-lg">
-				<!-- Modal content-->
-				<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title"><?php echo $row["title"]; ?>
-					<small><br />This resource can be downloaded here and can be found at our on premise library</small>
-					</h4>
-				</div>
-				<div class="modal-body">
-				<?php
 				$sql2 = "SELECT file_location FROM amphrc_library.file_location where publication_id =".$row["publication_id"];
 				$result2 = $conn->query($sql2);
 				if ($result2->num_rows > 0) {
 					while($row2 = $result2->fetch_assoc()) {
-						echo "<a href=\"./admin".$row2["file_location"]."\" target=\"_blank\">DOWNLOAD FILE</a><br /><br />- OR -<br /><br />";
+						echo "<a href=\"./admin".$row2["file_location"]."\" target=\"_blank\">Download File</a>";
 						#echo $row1["file_location"];
 					}
 				}
-				?>
-				<div id="includeDirections2"></div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default " data-dismiss="modal">Close</button>
-				</div>
-				</div>
-				</div>
-				</div>
-			<?php	
 			}
 				
 			echo "</td>";
@@ -231,7 +137,7 @@ echo "<hr />";
 			echo "<img src=\"./css/images/view.png\" alt=\"edit\" class=\"icon\" title=\"FileView\" /></a></td>";
 		}
 		echo "</tr></tbody></table>";
-		echo "<br /><br /><a href=\"./home.php\"><button  class=\"btn btn-info\">NEW SEARCH</button></a>";
+		echo "<br /><br /><a href=\"./home.php\"><button  class=\"btn btn-info\">Try another search</button></a>";
 	}
 	else	{
 ?>
